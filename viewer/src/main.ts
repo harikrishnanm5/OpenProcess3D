@@ -8,6 +8,8 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { loadScene } from './loader';
+import { createLayerControls } from './layers';
+import { createSectionControls } from './section';
 
 // Set standard 3D semiconductor CAD convention: Z axis is vertical up
 THREE.Object3D.DEFAULT_UP = new THREE.Vector3(0, 0, 1);
@@ -16,6 +18,7 @@ async function init(): Promise<void> {
   const container = document.getElementById('canvas-container');
   const infoOverlay = document.getElementById('info-overlay');
   const errorOverlay = document.getElementById('error-overlay');
+  const sidebarContainer = document.getElementById('sidebar-container');
 
   if (!container) {
     throw new Error("Missing '#canvas-container' element in DOM");
@@ -32,12 +35,13 @@ async function init(): Promise<void> {
   camera.up.set(0, 0, 1);
   camera.position.set(20, -25, 20);
 
-  // 3. Renderer setup
+  // 3. Renderer setup with local clipping enabled
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
   renderer.setSize(width, height);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.0;
+  renderer.localClippingEnabled = true;
   container.appendChild(renderer.domElement);
 
   // 4. OrbitControls setup
@@ -108,6 +112,15 @@ async function init(): Promise<void> {
       const layerNames = loaded.layers.map((l) => l.name).join(', ');
       infoOverlay.innerHTML = `<strong>OpenProcess3D Viewer</strong><br/>Layers (${loaded.layers.length}): ${layerNames}`;
     }
+
+    // Initialize UI controls in sidebar
+    if (sidebarContainer) {
+      sidebarContainer.innerHTML = '';
+      const layerControls = createLayerControls(loaded.layers);
+      const sectionControls = createSectionControls(loaded.layers, loaded.bounds);
+      sidebarContainer.appendChild(layerControls.element);
+      sidebarContainer.appendChild(sectionControls.element);
+    }
   } catch (err: unknown) {
     const errorMsg = err instanceof Error ? err.message : String(err);
     console.error('Failed to load scene:', err);
@@ -143,4 +156,3 @@ async function init(): Promise<void> {
 init().catch((err) => {
   console.error('Fatal initialization error:', err);
 });
-
