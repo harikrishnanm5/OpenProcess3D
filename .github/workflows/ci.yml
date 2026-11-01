@@ -49,6 +49,10 @@ jobs:
         working-directory: viewer
         run: npm ci
 
+      - name: Run viewer tests
+        working-directory: viewer
+        run: npm test
+
       - name: Build viewer
         working-directory: viewer
         run: npm run build
