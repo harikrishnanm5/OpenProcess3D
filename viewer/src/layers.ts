@@ -181,3 +181,4 @@ export function createLayerControls(
     getExplodeFactor: () => parseFloat(explodeSlider.value) || 0,
   };
 }
+
