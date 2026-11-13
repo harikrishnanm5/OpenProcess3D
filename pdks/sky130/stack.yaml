@@ -1,32 +1,60 @@
 # SkyWater 130nm process layer stack definition
-# Placeholder vertical offsets, thicknesses, and materials (marked approx: true).
-# Values must be verified against official SkyWater SKY130 documentation.
+# Layer thicknesses from SkyWater SKY130 documentation:
+# - nwell: 1.1 um (NWVDIM, junction depth)
+# - diff: 0.1 um (JCTD, S/D junction depth)
+# - poly: 0.18 um (POLYTH)
+# - licon1: 0.2 um (schematic / illustrative contact thickness)
+# - li1: 0.1 um (LiThick, antenna ratio calculations)
+# - mcon: 0.2 um (schematic / illustrative via thickness)
+# - met1: 0.35 um (Met1Thick, antenna ratio calculations)
+# Vertical coordinates (z) are schematic, stacked in fabrication order without gaps.
 
 layers:
   - name: nwell
     gds: [64, 20]
     z: 0.0
-    thickness: 1.0
+    thickness: 1.1
+    material: silicon
+    approx: true
+
+  - name: diff
+    gds: [65, 20]
+    z: 1.1
+    thickness: 0.1
     material: silicon
     approx: true
 
   - name: poly
     gds: [66, 20]
-    z: 0.0
-    thickness: 0.2
+    z: 1.2
+    thickness: 0.18
     material: polysilicon
+    approx: true
+
+  - name: licon1
+    gds: [66, 44]
+    z: 1.38
+    thickness: 0.2
+    material: tungsten
     approx: true
 
   - name: li1
     gds: [67, 20]
-    z: 0.5
+    z: 1.58
     thickness: 0.1
     material: local_interconnect
     approx: true
 
+  - name: mcon
+    gds: [67, 44]
+    z: 1.68
+    thickness: 0.2
+    material: tungsten
+    approx: true
+
   - name: met1
     gds: [68, 20]
-    z: 1.0
+    z: 1.88
     thickness: 0.35
     material: metal1
     approx: true

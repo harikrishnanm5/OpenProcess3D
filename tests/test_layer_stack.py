@@ -54,17 +54,28 @@ layers:
 
 
 def test_load_sky130_stack() -> None:
-    """Test loading the PDK Sky130 stack definition with required 4 layers."""
+    """Test loading the PDK Sky130 stack definition with required layers."""
     sky130_path = Path("pdks/sky130/stack.yaml")
     layers = load_stack(sky130_path)
 
-    assert len(layers) == 4
+    assert len(layers) == 7
     layer_map = {layer.name: layer for layer in layers}
-    assert set(layer_map.keys()) == {"nwell", "poly", "li1", "met1"}
+    assert set(layer_map.keys()) == {
+        "nwell",
+        "diff",
+        "poly",
+        "licon1",
+        "li1",
+        "mcon",
+        "met1",
+    }
 
     assert layer_map["nwell"].gds == (64, 20)
+    assert layer_map["diff"].gds == (65, 20)
     assert layer_map["poly"].gds == (66, 20)
+    assert layer_map["licon1"].gds == (66, 44)
     assert layer_map["li1"].gds == (67, 20)
+    assert layer_map["mcon"].gds == (67, 44)
     assert layer_map["met1"].gds == (68, 20)
 
     for layer in layers:
