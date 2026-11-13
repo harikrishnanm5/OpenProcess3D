@@ -4,7 +4,7 @@
 [![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB.svg?logo=python&logoColor=white)](https://www.python.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6%2B-3178C6.svg?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Three.js](https://img.shields.io/badge/Three.js-r170-black.svg?logo=three.js&logoColor=white)](https://threejs.org/)
-[![CI](https://github.com/harikrishnanm5/VLSI4Everyon/actions/workflows/ci.yml/badge.svg)](https://github.com/harikrishnanm5/VLSI4Everyon/actions/workflows/ci.yml)
+[![CI](https://github.com/harikrishnanm5/OpenProcess3D/actions/workflows/ci.yml/badge.svg)](https://github.com/harikrishnanm5/OpenProcess3D/actions/workflows/ci.yml)
 [![PDK](https://img.shields.io/badge/PDK-SkyWater_SKY130-orange.svg)](https://github.com/google/skywater-pdk)
 
 **OpenProcess3D** is a free, open-source 3D semiconductor process visualizer designed for students, educators, and VLSI engineers. It bridges the gap between 2D IC mask layouts (GDSII) and physical 3D silicon structures directly in the browser—with zero proprietary software licenses, zero installation friction, and full interactive control.
@@ -71,8 +71,8 @@ flowchart TD
 ### 2. Clone and Setup Environment
 
 ```bash
-git clone https://github.com/harikrishnanm5/VLSI4Everyon.git
-cd VLSI4Everyon
+git clone https://github.com/harikrishnanm5/OpenProcess3D.git
+cd OpenProcess3D
 
 # Setup Python virtual environment
 python -m venv .venv
@@ -119,7 +119,7 @@ Both the Python core and the TypeScript frontend maintain test suites with 100% 
 ```bash
 pytest -v
 ```
-*(36 tests covering GDS parsing, stack validation, polygon ear-clipping, concave/multi-hole watertight extrusions, scene export, and CLI pipelines)*
+*(37 tests covering GDS parsing, stack validation, polygon ear-clipping, concave/multi-hole watertight extrusions, scene export, CLI pipelines, and real SkyWater inverter integration)*
 
 ### TypeScript & Viewer Tests (vitest)
 ```bash
@@ -164,12 +164,15 @@ npm run build
 │   └── tsconfig.json           # Strict TypeScript configuration
 ├── examples/
 │   ├── test.gds                # Sample GDSII inverter layout
+│   ├── sky130_fd_sc_hd__inv_1.gds # SkyWater SKY130 inverter standard cell
+│   ├── inverter_scene.json     # Exported 3D scene for SKY130 inverter
 │   └── scene.json              # Reference exported scene
 ├── tests/
 │   ├── test_gds_loader.py      # GDS loading & hierarchy tests
 │   ├── test_layer_stack.py     # YAML schema & validation tests
 │   ├── test_extrude.py         # Manifold mesh & geometry tests
-│   └── test_export.py          # scene.json schema & CLI tests
+│   ├── test_export.py          # scene.json schema & CLI tests
+│   └── test_sky130_inverter.py # End-to-end integration test for SKY130 inverter
 └── .github/workflows/
     └── ci.yml                  # Automated Python + Node.js CI workflow
 ```
