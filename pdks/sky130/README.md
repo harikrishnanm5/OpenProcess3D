@@ -20,3 +20,5 @@ The layer stack definition in `stack.yaml` defines the physical and schematic pr
 - **`li1` (67, 20)**: SkyWater SKY130 docs, rules/assumptions "Criteria & Assumptions", Material Thicknesses table (parameter `LiThick`: $t = 0.1\,\mu\text{m}$, "for antenna ratio calculations"); GDS from rules/layers "Layers Reference" (67, 20); $z$ is schematic (`approx: true`).
 - **`mcon` (67, 44)**: GDS from SkyWater SKY130 rules/layers "Layers Reference" (67, 44); thickness ($t = 0.2\,\mu\text{m}$) and $z$ are schematic/illustrative (no source value in tables, marked `approx: true`).
 - **`met1` (68, 20)**: SkyWater SKY130 docs, rules/assumptions "Criteria & Assumptions", Material Thicknesses table (parameter `Met1Thick`: $t = 0.35\,\mu\text{m}$, "for antenna ratio calculations"); GDS from rules/layers "Layers Reference" (68, 20); $z$ is schematic (`approx: true`).
+
+`examples/sky130_fd_sc_hd__inv_1.gds` is from SkyWater's open sky130_fd_sc_hd library (Apache-2.0).
