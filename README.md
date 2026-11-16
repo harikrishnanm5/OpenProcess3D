@@ -119,6 +119,7 @@ Both the Python core and the TypeScript frontend maintain test suites with 100% 
 ```bash
 pytest -v
 ```
+*(36 tests covering GDS parsing, stack validation, polygon ear-clipping, concave/multi-hole watertight extrusions, scene export, and CLI pipelines)*
 *(37 tests covering GDS parsing, stack validation, polygon ear-clipping, concave/multi-hole watertight extrusions, scene export, CLI pipelines, and real SkyWater inverter integration)*
 
 ### TypeScript & Viewer Tests (vitest)
@@ -171,6 +172,7 @@ npm run build
 │   ├── test_gds_loader.py      # GDS loading & hierarchy tests
 │   ├── test_layer_stack.py     # YAML schema & validation tests
 │   ├── test_extrude.py         # Manifold mesh & geometry tests
+│   └── test_export.py          # scene.json schema & CLI tests
 │   ├── test_export.py          # scene.json schema & CLI tests
 │   └── test_sky130_inverter.py # End-to-end integration test for SKY130 inverter
 └── .github/workflows/
